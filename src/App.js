@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import './App.css';
+import features from './features/features';
+import summary from './summary/summary'
 
 class App extends Component {
-  constructor(props){
+  constructor(props) {
     super(props);
     this.state = {
       selected: {
@@ -26,25 +28,7 @@ class App extends Component {
     }
   }
 
-  updateFeature(feature, newValue) {
-    const selected = Object.assign({}, this.state.selected);
-    selected[feature] = newValue;
-    this.setState({
-      selected
-    });
-  }
-
-  render() {
-    
-
-    const total = Object.keys(this.state.selected)
-          .reduce((acc, curr) => acc + this.state.selected[curr].cost, 0);    
-
-
- 
-
-                
-
+  render () {
     return (
       <div className="App">
         <header>
@@ -53,25 +37,12 @@ class App extends Component {
           <h5>Customize your laptop</h5>  
         </header>      
         <main>
-					<section className="main__form">
-          	<h3>TECH SPECS AND CUSTOMIZATIONS</h3>
-          	{ features }
-      		</section>
-          <section className="main__summary">
-            <h3>NEW GREENLEAF 2018</h3>
-            {summary}
-            <div className="summary__total">
-              <div className="summary__total__label">Your Price: </div>
-              <div className="summary__total__value">
-              { new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD'})
-                  .format(total) }
-              </div>
-            </div>
-          </section>
+          <features />
+          <summary />
         </main>
       </div>
     );
   }
 }
 
-export default App;  
+export default App
