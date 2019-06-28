@@ -1,25 +1,17 @@
-import React, { Component } from React;
-import './features.css'
+import React, { Component } from 'react';
 
-updateFeature = (feature, newValue) => {
-	const selected = Object.assign({}, this.state.selected);
-	selected[feature] = newValue;
-	this.setState({
-		selected
-	});
-}
 
-class features extends Component {
+class Features extends Component {
   render () {
 		const features = Object.keys(this.props.features)
       .map(key => {
         const options = this.props.features[key].map((item, index) => {
-          const selectedClass = item.name === this.state.selected[key].name ? 'feature__selected' : '';
+          const selectedClass = item.name === this.props.selected[key].name ? 'feature__selected' : '';
           const featureClass = 'feature__option ' + selectedClass;
           return <li key={index} className="feature__item">
             <div className={featureClass}
                   
-              onClick={e => this.updateFeature(key, item)}>
+              onClick={e => this.props.updateFeatures(key, item)}>
                 { item.name }
                 ({ new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD'})
                   .format(item.cost) })
@@ -37,10 +29,10 @@ class features extends Component {
 		return (
 			<section className="main__form">
         <h3>TECH SPECS AND CUSTOMIZATIONS</h3>
-        { features }
+         { features } 
       </section>
 		)	
 	}
 }	
 
-export default features;
+export default Features;
